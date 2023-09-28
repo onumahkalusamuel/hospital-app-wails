@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  font-size: 16px;
+  color: #333333;
+}
+
+.table {
+  /* height: 100%; */
+  width:100%;
+  /* display:flex; */
+  /* flex-direction: column; */
+}
+
+.table-row {
+  border-bottom: 1px solid #ddd;
+  min-height: 32px;
+  display:flex;
+  padding: 5px 0px;
+}
+.table-row:hover {
+  background-color: azure;
+}
+
+.table-header {
+  min-height: 42px;
+  font-weight: 600;
+  border-bottom: 1px solid #eee;
+}
+
+.cell-data {
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+.cell-sn {
+  width: 60px;
+  padding: 0 15px;
+}
+
+.cell-size-1 {
+  width: 240px;
+}
+.cell-size-2 {
+  width: 290px;
+}
+
+.cell-size-3 {
+  width: 350px;
+}
+/* PAGE SETUP */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 50px);
+}
+.page-scroll-area {
+  flex-grow: 1;
+  overflow-y: scroll;
+  scrollbar-color: white;
+  scrollbar-width: none;
+}
+
+.page-scroll-area::-webkit-scrollbar{
+  display: none;
+}
+
+.form {
+  margin: 4px 0px;
+  padding-top: 4px;
+  display:flex;
+  flex-wrap: wrap;
+}
