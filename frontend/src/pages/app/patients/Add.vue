@@ -44,7 +44,7 @@ const create = async () => {
     <div class="page-scroll-area">
       <form method="POST" v-on:submit.prevent="create" class="p-5" ref="createForm">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <CheckboxField :options="['Mr.', 'Mrs.', 'Prof.', 'Dr.']" label="Title" name="title" model-value="Mr." />
+          <CheckboxField :options="['Mr.', 'Ms.', 'Mrs.', 'Prof.', 'Dr.']" label="Title" name="title" model-value="Mr." />
           <CheckboxField :options="['Male', 'Female']" label="Gender" name="sex" />
           <CheckboxField :options="['Single', 'Married', 'Widowed']" label="Marital Status" name="marital_status" />
           <CheckboxField :options="['Yes', 'No']" label="ANC Patient?" required name="anc" model-value="No"/>

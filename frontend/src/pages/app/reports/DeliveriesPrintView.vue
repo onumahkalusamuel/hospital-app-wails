@@ -33,11 +33,10 @@ onMounted(async () => {
 
 <template>
     <div class="page-wrapper w-[920px] my-5 m-auto">
-        <div class="flex justify-between">
-            <div class="px-[15px] flex justify-center py-2 gap-2">
-                <ActionButton dark v-on:click="downloadPdf" :icon-src="DocumentArrowDownIcon">Download as PDF</ActionButton>
-            </div>
-            <ActionButton v-on:click="() => $router.go(-1)" :icon-src="XCircleIcon">Exit</ActionButton>
+        <div class="px-[10px] flex items-center justify-between lg:justify-center">
+            <ActionButton dark v-on:click="downloadPdf" :icon-src="DocumentArrowDownIcon">Download as PDF</ActionButton>
+            <ActionButton class="inline lg:fixed lg:top-5 lg:right-5" outline v-on:click="() => $router.go(-1)"
+                :icon-src="XCircleIcon">Exit</ActionButton>
         </div>
         <div class="border-[1px] p-2 border-stone-950 m-2 gap-5 flex flex-col" ref="printArea">
             <div class="flex border-b-[1px] p-2 border-stone-600">
@@ -83,7 +82,8 @@ onMounted(async () => {
                         {{ dayjs(delivery.delivery_date_time).format('DD-MM-YYYY hh:mm A') }}
                     </td>
                     <td class="border-[1px] border-black p-1">
-                        {{ `${delivery.patient?.lastname} ${delivery.patient?.firstname} ${delivery.patient?.middlename} - ${delivery.patient?.card_no}` }}
+                        {{ `${delivery.patient?.lastname} ${delivery.patient?.firstname} ${delivery.patient?.middlename} -
+                                                ${delivery.patient?.card_no}` }}
                     </td>
                     <td class="border-[1px] border-black p-1">{{ delivery.baby_sex }}</td>
                     <td class="border-[1px] border-black p-1">{{ delivery.baby_weight }} kg</td>

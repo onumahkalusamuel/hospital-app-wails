@@ -77,7 +77,7 @@ watch(() => pagination.value.query, fetchPatientHistory);
 </script>;
 
 <template>
-  <div class="px-[15px] border-t-[1px] border-[#333] py-2 flex justify-between items-center">
+  <div class="px-[15px] border-t-[1px] border-[#333] py-2 gap-2 flex justify-between flex-wrap items-center">
     <div class=" text-xl">History Details</div>
     <div class="flex gap-2">
       <ActionButton dark @click="showAddHistoryPopup" :icon-src="BookOpenIcon">Add history</ActionButton>

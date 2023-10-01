@@ -39,7 +39,7 @@ func Create(c echo.Context) error {
 
 	// check username
 	var inuse = []models.Staff{}
-	config.DB.Unscoped().Where("username='" + staff.Username + "'").Find(&inuse)
+	config.DB.Unscoped().Where("username LIKE ?", staff.Username).Find(&inuse)
 
 	if len(inuse) > 0 {
 		return c.JSON(http.StatusBadRequest, echo.Map{"message": "username already in use"})

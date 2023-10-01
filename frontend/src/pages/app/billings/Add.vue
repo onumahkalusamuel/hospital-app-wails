@@ -18,6 +18,7 @@ import { PencilIcon } from '@heroicons/vue/24/solid';
 
 const breadcrumbs = ref([
   { title: "Dashboard", link: { name: "dashboard" } },
+  { title: "Billings", link: { name: "billings" } },
   { title: "Add Invoice", current: true },
 ] as BreadcrumbItem[]);
 

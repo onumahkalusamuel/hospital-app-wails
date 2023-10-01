@@ -31,19 +31,17 @@ func Login(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, echo.Map{"message": "bad request"})
 	}
 
-	staff := models.Staff{
-		Username: loginRequest.Username,
-	}
+	var staffs []*models.Staff
 
-	staff.Read()
+	config.DB.Where("username LIKE ?", loginRequest.Username).Find(&staffs)
 
-	if staff.ID == "" || !pkg.CheckPassword(staff.Password, loginRequest.Password) {
+	if len(staffs) == 0 || !pkg.CheckPassword(staffs[0].Password, loginRequest.Password) {
 		return c.JSON(403, echo.Map{"message": "Invalid username or password"})
 	}
 
 	// Set custom claims
 	claims := &JwtCustomClaims{
-		staff.ID, staff.Lastname, staff.Username, staff.Role,
+		staffs[0].ID, staffs[0].Lastname, staffs[0].Username, staffs[0].Role,
 		jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 6)),
 		},

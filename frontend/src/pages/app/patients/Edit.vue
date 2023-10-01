@@ -48,7 +48,7 @@ onMounted(async () => { await fetchPatient() });
     <div class="page-scroll-area">
       <form method="POST" v-on:submit.prevent="update" class="p-5" ref="form">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <CheckboxField :options="['Mr.', 'Mrs.', 'Prof.', 'Dr.']" label="Title" name="title" v-model="patient.title" />
+          <CheckboxField :options="['Mr.', 'Ms.', 'Mrs.', 'Prof.', 'Dr.']" label="Title" name="title" v-model="patient.title" />
           <CheckboxField :options="['Male', 'Female']" label="Gender" name="sex" v-model="patient.sex" />
           <CheckboxField :options="['Single', 'Married', 'Widowed']" label="Marital Status" name="marital_status" v-model="patient.marital_status" />
           <CheckboxField :options="['Yes', 'No']" label="ANC Patient?" required name="anc" v-model="patient.anc" />
@@ -62,7 +62,7 @@ onMounted(async () => { await fetchPatient() });
             <TextField label="First Name" placeholder="John" name="firstname" :value="patient.firstname"></TextField>
           </div>
           <div>
-            <TextField label="Card No" :value="(patient.card_no as string)" readonly></TextField>
+            <TextField label="Card No" placeholder="HC001" name="card_no" :value="patient.card_no"></TextField>
           </div>
           <div>
             <TextField label="Phone Number" name="phone" type="tel" :value="patient.phone"></TextField>

@@ -22,7 +22,6 @@ func PatientHistoryUpdate(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, "bad request")
 	}
 
-	// patientHistory.StaffID = c.Get("ID").(string)
 	patientHistory.PatientID = c.Param("patient_id")
 	patientHistory.ID = c.Param("history_id")
 	patientHistory.Read()

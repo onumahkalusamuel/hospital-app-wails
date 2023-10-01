@@ -64,8 +64,8 @@ const activeTab = ref('General' as PatientHistoryTypes);
                     <div class="w-full"><TextArea :label="`${history} Note`" :placeholder="`${history} Note`"
                             :name="`details[${history.toLowerCase()}][note]`" rows="2"></TextArea></div>
                     <div class="w-full">
-                        <TextField class="flex h-[65%]" :label="`Document (.png, .jpg, .jpeg)`" type="file"
-                            :name="`details[${history.toLowerCase()}][document]`" accept=".png, .jpg, .jpeg"></TextField>
+                        <TextField class="flex h-[65%]" :label="`Document (.pdf, .png, .jpg, .jpeg)`" type="file"
+                            :name="`details[${history.toLowerCase()}][document]`" accept=".pdf, .png, .jpg, .jpeg"></TextField>
                     </div>
                 </div>
             </div>

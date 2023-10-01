@@ -10,6 +10,7 @@ import PrimaryButton from '@/components/form/PrimaryButton.vue';
 import SecondaryButton from '@/components/form/SecondaryButton.vue';
 import { Patient, PatientHistory, PatientHistoryTypes } from '@/interfaces';
 import CheckboxField from '@/components/form/CheckboxField.vue';
+import DocumentViewPopup from '@/components/popups/DocumentViewPopup.vue';
 
 const props = defineProps<{ popupId: string, patient: Patient, history: PatientHistory }>()
 const updateHistoryRef = ref(null);
@@ -29,6 +30,13 @@ const updateHistory = async () => {
 
 const historyTypes = ref(['General', 'Appointment', 'Admission', 'Discharge', 'Diagnosis', 'Examination', 'TestResult', 'Treatment'] as PatientHistoryTypes[]);
 const activeTab = ref('General' as PatientHistoryTypes);
+
+const currentDocumentUrl = ref('');
+const viewDocument = (documentUrl: string) => {
+    currentDocumentUrl.value = documentUrl;
+    popupStore.child_id = 'document';
+    popupStore.child_show = true
+}
 
 </script>
 <template>
@@ -69,20 +77,23 @@ const activeTab = ref('General' as PatientHistoryTypes);
                             :name="`details[${his.toLowerCase()}][note]`" rows="2"
                             :value="history.details[`${his.toLowerCase()}`].note"></TextArea></div>
                     <div class="w-full">
-                        <TextField class="flex h-[65%]" :label="`Document (.png, .jpg, .jpeg)`" type="file"
-                            :name="`details[${his.toLowerCase()}][document]`" accept=".png, .jpg, .jpeg"></TextField>
+                        <TextField class="flex h-[65%]" :label="`Document (.pdf, .png, .jpg, .jpeg)`" type="file"
+                            :name="`details[${his.toLowerCase()}][document]`" accept=".pdf, .png, .jpg, .jpeg"></TextField>
                     </div>
                 </div>
 
                 <div class="mb-2 border-[1px] bg-blue-100 p-2 rounded pointer-cusrsor"
                     v-if="history.details[`${his.toLowerCase()}`].document.length">
                     <div class="title">Previous Document:</div>
-                    <a :href="`${hospital.asset_base_url}/files/images_${patient.id}/${history.details[`${his.toLowerCase()}`].document}`"
-                        target="_blank">
-                        <img class="max-h-[150px]"
+                    <div @click="viewDocument(`${hospital.asset_base_url}/files/images_${patient.id}/${history.details[`${his.toLowerCase()}`].document}`)"
+                        class="cursor-pointer">
+                        <img v-if="(['jpg', 'jpeg', 'png'].includes(history.details[`${his.toLowerCase()}`].document.substring(history.details[`${his.toLowerCase()}`].document.length - 3)))"
+                            class="max-h-[250px] border-[1px] rounded-lg inline-block p-1 border-stone-500"
                             :src="`${hospital.asset_base_url}/files/images_${patient.id}/${history.details[`${his.toLowerCase()}`].document}`"
-                            alt="Supporting Document" />
-                    </a>
+                            alt="Click to view" />
+                        <div v-else class="max-h-[250px] border-[1px] rounded-lg inline-block px-4 py-1 border-stone-500">
+                            Click to view</div>
+                    </div>
                 </div>
             </div>
             <div class="flex gap-3 mt-5">
@@ -94,6 +105,7 @@ const activeTab = ref('General' as PatientHistoryTypes);
                 </div>
             </div>
         </form>
+        <DocumentViewPopup :document-url="currentDocumentUrl" popup-id="document" />
     </pop-up>
 </template>
 
@@ -103,4 +115,5 @@ const activeTab = ref('General' as PatientHistoryTypes);
     border-radius: 5px;
     font-weight: bold;
     margin-right: 5px;
-}</style>
+}
+</style>

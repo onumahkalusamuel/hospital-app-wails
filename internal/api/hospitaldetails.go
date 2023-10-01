@@ -45,7 +45,15 @@ func HospitalDetails(c echo.Context) error {
 	setting.Read()
 	hospital["hospital_logo"] = setting.Value
 
-	hospital["asset_base_url"] = "//" + c.Request().Host
+	// base asset url
+	address := ""
+	_, ipAddress := TestIPAddress(GetOutboundIP())
+
+	if ipAddress != "" {
+		address = "http://" + ipAddress
+	}
+
+	hospital["asset_base_url"] = address
 
 	// return
 	return c.JSON(http.StatusOK, hospital)

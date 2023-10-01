@@ -36,8 +36,8 @@ const updateHospital = async () => {
   <div class="p-[15px]">
     <div class="text-2xl pt-2 pb-4">Settings</div>
     <div></div>
-    <div class="flex flex-col sm:flex-row gap-4">
-      <div class="sm:w-[50%] border-[1px] border-blue-600 px-3 p-2 rounded">
+    <div class="flex flex-col md:flex-row gap-4">
+      <div class="w-full border-[1px] border-blue-600 px-3 p-2 rounded">
         <h1 class="mt-3 text-xl">Profile Settings</h1>
         <div class="my-4">
           <form @submit.prevent="updateProfile" class="space-y-5" ref="profileHandle">
@@ -56,7 +56,7 @@ const updateHospital = async () => {
           </form>
       </div>
       </div>
-      <div class="sm:w-[50%] border-[1px] border-blue-600 px-3 p-2 rounded" v-if="user.role == '1'">
+      <div class="w-full border-[1px] border-blue-600 px-3 p-2 rounded" v-if="user.role == '1'">
         <h1 class="mt-3 text-xl">System Settings</h1>
         <div class="my-4">
           <form v-on:submit.prevent="updateHospital" class="space-y-5" ref="hospitalHandle" enctype="multipart/form-data" :key="hospitalFormKey">

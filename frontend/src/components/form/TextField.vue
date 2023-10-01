@@ -31,7 +31,7 @@ const updateValue = (event: any) => {
       {{ label }}
       <span v-if="required" class="text-red-600">*</span>
     </label>
-    <div class="flex w-full border-[1px] border-[#888] rounded flex items-center justify-center bg-white hover:bg-gray-100"
+    <div class="flex w-full border-[1px] border-[#888] rounded items-center justify-center bg-white hover:bg-gray-100"
       :class="class">
       <div v-if="$slots.prepend" class="px-2 flex items-center justify-center hover:bg-gray-100 rounded">
         <slot name="prepend"></slot>

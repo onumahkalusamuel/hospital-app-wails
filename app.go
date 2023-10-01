@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"os"
+	"time"
 
 	"hospital-app/config"
 	"hospital-app/internal"
@@ -23,6 +25,8 @@ func NewApp() *App {
 func (a *App) startup(ctx context.Context) {
 	// Perform your setup here
 	a.ctx = ctx
+	os.Mkdir(config.AppDataFolder, 0755)
+	os.Mkdir(config.FilesFolder, 0755)
 	go internal.WebServer()
 }
 
@@ -43,4 +47,5 @@ func (a *App) beforeClose(ctx context.Context) (prevent bool) {
 func (a *App) shutdown(ctx context.Context) {
 	// Perform your teardown here
 	config.SERVER_HANDLE.Shutdown(nil)
+	time.Sleep(2 * time.Second)
 }
